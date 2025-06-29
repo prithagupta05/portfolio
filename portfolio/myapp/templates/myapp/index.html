@@ -1,0 +1,367 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pritha Gupta | Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg: #1a1a1a;
+      --text: #fff;
+      --accent: #00ffc3;
+      --light-bg: #f9f9f9;
+      --light-text: #111;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s ease;
+    }
+
+    body.light-mode {
+      background: var(--light-bg);
+      color: var(--light-text);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 220px;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2rem 1rem;
+      z-index: 999;
+    }
+
+    nav h1 {
+      
+      color: var(--accent);
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      fontsize:85px;
+      margin: 1.2rem 0;
+      text-align: center;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    nav ul li a:hover {
+      color: var(--accent);
+    }
+
+    nav .toggle-mode {
+      background: none;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.4rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 0 auto;
+    }
+
+    main {
+      margin-left: 220px;
+      padding: 2rem;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      min-height: 100vh;
+    }
+
+    #home {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+    }
+
+    #home .left {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    #home .right {
+      flex: 1;
+      text-align: center;
+    }
+
+    .right img {
+      max-width: 300px;
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    #typing {
+      font-size: 1.3rem;
+      margin-top: 1rem;
+      color: #a6ff00;
+      height: 40px;
+    }
+
+    .btn, .resume-btn {
+      background: var(--accent);
+      color: #000;
+      padding: 0.7rem 1.2rem;
+      margin: 1rem 0.5rem 0 0;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover, .resume-btn:hover {
+      background: #0cd;
+      color: #000;
+    }
+
+    .section-title {
+      text-align: center;
+      color: var(--accent);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .skills, .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 0 10px rgba(0,255,195,0.15);
+    }
+
+    .skill-bar {
+      height: 10px;
+      background: #444;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 1.5s ease-out;
+    }
+
+    form {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: 5px;
+      background: #222;
+      color: white;
+    }
+
+    #scrollTop {
+      position: fixed;
+      right: 20px;
+      bottom: 30px;
+      background: var(--accent);
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: none;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: 0.6s ease-in-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        position: static;
+        height: auto;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      main {
+        margin-left: 0;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <h1>Pritha</h1>
+    <ul>
+      <li><h1><a href="#home">Home</a></h1></li>
+      <li><h1><a href="#about">About</a></h1></li>
+      <li><h1><a href="#skills">Skills</a></h1></li>
+      <li><h1><a href="#projects">Projects</a></h1></li>
+      <li><h1><a href="#contact">Contact</a></h1></li>
+    </ul>
+  </div>
+  <button class="toggle-mode" onclick="toggleMode()">🌗</button>
+</nav>
+
+<main>
+  <section id="home">
+    <div class="left">
+      <h2>Hi, I'm Pritha Gupta</h2>
+      <div id="typing"></div>
+      <a href="#contact" class="btn">Hire Me</a>
+      <a target="_blank" href ="./static/prithagupta.pdf" class="resume-btn">Resume</a>
+    </div>
+    <div class="right">
+      <img src="{% static 'myapp/hero.jpg' %}" alt="Hero Image">
+    </div>
+  </section>
+
+  <section id="about" class="fade-in">
+    <h2 class="section-title">About Me</h2>
+    <h1 style="max-width: 600px; margin:auto;">I'm pritha gupta, a dedicated and innovative engineer with a strong interest in frontend development in Computer Science with a passion for problem-solving , and user interface design. I enjoy building interactive and responsive websites.<br>
+<br>
+My passion is to become a full-stack developer.<Br> 
+<br>
+I will want to focus on building a strong foundation in both front-end and back-end development.<br>
+<br>
+My motivation is my dad inspire me and teach me everytime and supporting giving the confident to grow.
+</h1>
+  </section>
+
+  <section id="skills" class="fade-in">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills">
+      <div class="card">
+        <strong>HTML</strong>
+        <div class="skill-bar"><div class="bar-fill" data-percent="95%"></div></div>
+      </div>
+      <div class="card">
+        <strong>CSS</strong>
+        <div class="skill-bar"><div class="bar-fill" data-percent="90%"></div></div>
+      </div>
+      <div class="card">
+        <strong>JavaScript</strong>
+        <div class="skill-bar"><div class="bar-fill" data-percent="65%"></div></div>
+      </div>
+      <div class="card">
+        <strong>python</strong>
+        <div class="skill-bar"><div class="bar-fill" data-percent="80%"></div></div>
+      </div>
+    </div>
+  </section>
+   <section id="projects" class="fade-in">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects">
+
+
+        <div class="card">
+          <h3>Frontend Web Designing</h3>
+          <p>Frontend Web Designing is the process of creating the visual and interactive part of a website—the part users see and interact with in their browser. It includes layout, colors, fonts, buttons, menus, animations, and more.</p>
+          <a href="{% static 'myapp/pj.png' %}" class="btn">View photo</a>
+        </div>
+
+     
+    </div>
+  </section>
+
+  <section id="contact" class="fade-in">
+    <h2 class="section-title">Contact Me</h2>
+    <form method="post">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <input type="text" name="number" placeholder="Your Phone Number" required />
+      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit" class="btn">Send</button>
+    </form>
+  </section>
+</main>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+
+<script>
+  const typingText = "Frontend Developer | backend Developer";
+  let i = 0;
+  function type() {
+    if (i < typingText.length) {
+      document.getElementById("typing").innerHTML += typingText.charAt(i);
+      i++;
+      setTimeout(type, 100);
+    }
+  }
+  type();
+
+  window.onscroll = () => {
+    document.getElementById('scrollTop').style.display = window.scrollY > 200 ? 'block' : 'none';
+  };
+
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("visible");
+    });
+  }, { threshold: 0.2 });
+  fadeEls.forEach(el => fadeObserver.observe(el));
+
+  const bars = document.querySelectorAll('.bar-fill');
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const percent = entry.target.dataset.percent;
+        entry.target.style.width = percent;
+      }
+    });
+  }, { threshold: 0.3 });
+  bars.forEach(b => barObserver.observe(b));
+
+  function toggleMode() {
+    document.body.classList.toggle('light-mode');
+  }
+</script>
+</body>
+</html>
